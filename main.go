@@ -9,9 +9,11 @@ import (
 
 func main() {
 	url := flag.String("url", "https://www.google.com", "the url to fetch")
-	resp, err := http.Get(*url)
+	flag.Parse()
+	c := &http.Client{}
+	resp, err := c.Get(*url)
 	if err != nil {
-		fmt.Printf("Get %v; returned error %v", err)
+		fmt.Printf("Get failed; returned error %v", err)
 		return
 	}
 	defer resp.Body.Close()
